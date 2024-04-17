@@ -1,8 +1,8 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Container from "./components/Container";
-import styles from './page.module.css';
-import Button from './components/Button';
+import styles from "./page.module.css";
+import Button from "./components/Button";
 
 export default async function Home() {
     const { hero, about, linkCards } = await getData();
@@ -12,13 +12,18 @@ export default async function Home() {
             <Header />
             <main>
                 <Container>
-                    <section className={styles.hero} style={{ backgroundImage: `url(${hero.backgroundImage})` }}>
+                    <section
+                        className={styles.hero}
+                        style={{
+                            backgroundImage: `url(${hero.backgroundImage})`,
+                        }}
+                    >
                         <h1 className={styles.name}>{hero.name}</h1>
                         <h2>{hero.jobTitle}</h2>
                     </section>
-                    <section>
+                    <section className={styles.about}>
                         <img src={about.image} alt="About me" />
-                        <p>{about.bio}</p>
+                        <p className={styles.bio}>{about.bio}</p>
                     </section>
                     <section>
                         {linkCards.map((card, index) => (
@@ -26,7 +31,12 @@ export default async function Home() {
                                 <h3>{card.title}</h3>
                                 <img src={card.image} alt={card.title} />
                                 <p>{card.text}</p>
-                                <Button variant="secondary" href={card.buttonLink}>{card.buttonText}</Button>
+                                <Button
+                                    variant="secondary"
+                                    href={card.buttonLink}
+                                >
+                                    {card.buttonText}
+                                </Button>
                             </div>
                         ))}
                     </section>
@@ -40,8 +50,15 @@ export default async function Home() {
 // Placeholder function to simulate fetching data from Strapi CMS
 export async function getData() {
     // Replace these with your actual Strapi CMS calls
-    const hero = { name: "Your Name", jobTitle: "Your Job Title", backgroundImage: '/path/to/background.jpg'};
-    const about = { image: "/path/to/image.jpg", bio: "Your bio" };
+    const hero = {
+        name: "Your Name",
+        jobTitle: "Your Job Title",
+        backgroundImage: "/path/to/background.jpg",
+    };
+    const about = {
+        image: "/path/to/image.jpg",
+        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. At urna condimentum mattis pellentesque. Dolor sit amet consectetur adipiscing. Blandit turpis cursus in hac. Nec tincidunt praesent semper feugiat nibh. Viverra suspendisse potenti nullam ac tortor vitae. Netus et malesuada fames ac turpis egestas maecenas. Lacinia at quis risus sed. Enim nunc faucibus a pellentesque sit amet porttitor eget. Massa id neque aliquam vestibulum morbi. Augue eget arcu dictum varius duis.",
+    };
     const linkCards = [
         {
             title: "Card 1",
