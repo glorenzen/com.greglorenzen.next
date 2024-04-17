@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Container from "./components/Container";
 
 export default async function Home() {
     const { hero, about, linkCards } = await getData();
@@ -8,26 +9,27 @@ export default async function Home() {
         <div>
             <Header />
             <main>
-                <section>
-                    <h1>{hero.name}</h1>
-                    <h2>{hero.jobTitle}</h2>
-                </section>
-                <section>
-                    <img src={about.image} alt="About me" />
-                    <p>{about.bio}</p>
-                </section>
-                <section>
-                    {linkCards.map((card, index) => (
-                        <div key={index}>
-                            <h3>{card.title}</h3>
-                            <img src={card.image} alt={card.title} />
-                            <p>{card.text}</p>
-                            <a href={card.buttonLink}>{card.buttonText}</a>
-                        </div>
-                    ))}
-                </section>
+                <Container>
+                    <section>
+                        <h1>{hero.name}</h1>
+                        <h2>{hero.jobTitle}</h2>
+                    </section>
+                    <section>
+                        <img src={about.image} alt="About me" />
+                        <p>{about.bio}</p>
+                    </section>
+                    <section>
+                        {linkCards.map((card, index) => (
+                            <div key={index}>
+                                <h3>{card.title}</h3>
+                                <img src={card.image} alt={card.title} />
+                                <p>{card.text}</p>
+                                <a href={card.buttonLink}>{card.buttonText}</a>
+                            </div>
+                        ))}
+                    </section>
+                </Container>
             </main>
-
             <Footer />
         </div>
     );
