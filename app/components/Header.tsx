@@ -1,3 +1,6 @@
+import Container from "./Container";
+import styles from "./Header.module.css";
+
 interface NavItem {
     text: string;
     link: string;
@@ -17,24 +20,28 @@ export default async function Header() {
     const { navItems, logo } = await getData();
 
     return (
-        <header>
-            <div className="logo">
-                {logo && <img src={logo.url} alt={logo.alt} />}
-            </div>
-            <nav>
-                <ul>
-                    {navItems.map((item, index) => (
-                        <li key={index}>
-                            <a href={item.link}>{item.text}</a>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-            <div className="hamburger-menu">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+        <header className={styles.header}>
+            <Container>
+                <div className={styles.menuContainer}>
+                    <div className={styles.logo}>
+                        {logo && <img src={logo.url} alt={logo.alt} />}
+                    </div>
+                    <nav>
+                        <ul>
+                            {navItems.map((item, index) => (
+                                <li key={index}>
+                                    <a href={item.link}>{item.text}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                    <div className={styles.hamburgerMenu}>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </Container>
         </header>
     );
 }
