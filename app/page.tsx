@@ -19,7 +19,10 @@ export default async function Home() {
                         }}
                     >
                         <h1 className={styles.name}>{hero.name}</h1>
-                        <h2>{hero.jobTitle}</h2>
+                        <h2 className={styles.title}>{hero.jobTitle}</h2>
+                        <Button variant="primary" href="/resume">
+                            Resume
+                        </Button>
                     </section>
                     <section className={styles.about}>
                         <img src={about.image} alt="About me" />
