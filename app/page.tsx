@@ -1,6 +1,8 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Container from "./components/Container";
+import styles from './page.module.css';
+import Button from './components/Button';
 
 export default async function Home() {
     const { hero, about, linkCards } = await getData();
@@ -10,8 +12,8 @@ export default async function Home() {
             <Header />
             <main>
                 <Container>
-                    <section>
-                        <h1>{hero.name}</h1>
+                    <section className={styles.hero} style={{ backgroundImage: `url(${hero.backgroundImage})` }}>
+                        <h1 className={styles.name}>{hero.name}</h1>
                         <h2>{hero.jobTitle}</h2>
                     </section>
                     <section>
@@ -24,7 +26,7 @@ export default async function Home() {
                                 <h3>{card.title}</h3>
                                 <img src={card.image} alt={card.title} />
                                 <p>{card.text}</p>
-                                <a href={card.buttonLink}>{card.buttonText}</a>
+                                <Button variant="secondary" href={card.buttonLink}>{card.buttonText}</Button>
                             </div>
                         ))}
                     </section>
@@ -38,7 +40,7 @@ export default async function Home() {
 // Placeholder function to simulate fetching data from Strapi CMS
 export async function getData() {
     // Replace these with your actual Strapi CMS calls
-    const hero = { name: "Your Name", jobTitle: "Your Job Title" };
+    const hero = { name: "Your Name", jobTitle: "Your Job Title", backgroundImage: '/path/to/background.jpg'};
     const about = { image: "/path/to/image.jpg", bio: "Your bio" };
     const linkCards = [
         {
