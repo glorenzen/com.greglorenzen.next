@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 :root {
     --primary-color: #D87B4F;
+    --primary-color-light: #E19A79;
     --secondary-color: #82ADE4;
+    --secondary-color-light: #9EBFEA;
     --success-color: #28A745;
     --info-color: #17A2B8;
     --warning-color: #FFC107;
