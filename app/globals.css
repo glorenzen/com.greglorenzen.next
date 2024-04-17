@@ -15,10 +15,13 @@
     --dark-color: #343A40;
 }
 
+html {
+    font-size: 18px;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    font-size: 18px;
 }
 
 h1, h2, h3, h4, h5, h6 {
