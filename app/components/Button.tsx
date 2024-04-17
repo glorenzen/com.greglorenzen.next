@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
@@ -8,9 +9,9 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ variant, children, href }) => {
     return href ? (
-        <a href={href} className={`${styles.button} ${styles[variant]}`}>
+        <Link href={href} className={`${styles.button} ${styles[variant]}`}>
             {children}
-        </a>
+        </Link>
     ) : (
         <button className={`${styles.button} ${styles[variant]}`}>
             {children}
