@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Container from "./Container";
+import Container from "../Container/Container";
 import styles from "./Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";

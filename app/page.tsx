@@ -1,8 +1,9 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Container from "./components/Container";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Container from "./components/Container/Container";
 import styles from "./page.module.css";
-import Button from "./components/Button";
+import Button from "./components/Button/Button";
+import LinkCard from "./components/LinkCard/LinkCard";
 
 export default async function Home() {
     const { hero, about, linkCards } = await getData();
@@ -30,17 +31,14 @@ export default async function Home() {
                     </section>
                     <section>
                         {linkCards.map((card, index) => (
-                            <div key={index}>
-                                <h3>{card.title}</h3>
-                                <img src={card.image} alt={card.title} />
-                                <p>{card.text}</p>
-                                <Button
-                                    variant="secondary"
-                                    href={card.buttonLink}
-                                >
-                                    {card.buttonText}
-                                </Button>
-                            </div>
+                            <LinkCard
+                                key={index}
+                                title={card.title}
+                                image={card.image}
+                                text={card.text}
+                                buttonLink={card.buttonLink}
+                                buttonText={card.buttonText}
+                            />
                         ))}
                     </section>
                 </Container>
