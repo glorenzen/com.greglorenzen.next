@@ -1,0 +1,32 @@
+.linkCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    transition: transform 0.2s;
+    text-align: center;
+    max-width: 300px;
+    min-width: 200px;
+}
+
+a.linkCard {
+    color: inherit;
+    text-decoration: none;
+}
+
+.linkCard .title {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.linkCard:hover {
+    transform: translateY(-5px);
+}
+
+.linkCard h3 {
+    margin: 0;
+    margin-bottom: 10px;
+}

@@ -1,4 +1,6 @@
+import Link from "next/link";
 import Button from "../Button/Button";
+import styles from "./LinkCard.module.css";
 
 interface LinkCardProps {
     title: string;
@@ -16,14 +18,12 @@ const LinkCard: React.FC<LinkCardProps> = ({
     buttonText,
 }) => {
     return (
-        <div>
-            <h3>{title}</h3>
+        <Link href={buttonLink} className={styles.linkCard}>
+            <h3 className={styles.title}>{title}</h3>
             <img src={image} alt={title} />
             <p>{text}</p>
-            <Button variant="secondary" href={buttonLink}>
-                {buttonText}
-            </Button>
-        </div>
+            <Button variant="secondary">{buttonText}</Button>
+        </Link>
     );
 };
 

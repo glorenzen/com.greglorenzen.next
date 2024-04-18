@@ -29,7 +29,7 @@ export default async function Home() {
                         <img src={about.image} alt="About me" />
                         <p className={styles.bio}>{about.bio}</p>
                     </section>
-                    <section>
+                    <section className={styles.linkCards}>
                         {linkCards.map((card, index) => (
                             <LinkCard
                                 key={index}
