@@ -11,7 +11,7 @@ export default async function Home() {
     return (
         <div>
             <Header />
-            <main>
+            <main className={styles.home}>
                 <Container>
                     <section
                         className={styles.hero}
