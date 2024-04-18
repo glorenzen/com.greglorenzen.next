@@ -1,0 +1,14 @@
+.footer {
+    background-color: var(--secondary-color);
+    padding: 25px 0;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.github {
+    color: #fff;
+}
