@@ -48,16 +48,36 @@ export default async function Home() {
     );
 }
 
-// Placeholder function to simulate fetching data from Strapi CMS
 export async function getData() {
-    // Replace these with your actual Strapi CMS calls
+    // Fetch data from Strapi
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/home-page?populate[aboutImage][populate]=*&populate=heroBackgroundImage`,
+        {
+            headers: {
+                Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+            },
+        }
+    );
+
+    const {
+        data: {
+            attributes: {
+                heroName,
+                heroTitle,
+                aboutBio,
+                heroBackground,
+                aboutImage,
+            },
+        },
+    } = await res.json();
+
     const hero = {
-        name: "Your Name",
-        jobTitle: "Your Job Title",
+        name: heroName,
+        jobTitle: heroTitle,
         backgroundImage: "/path/to/background.jpg",
     };
     const about = {
-        image: "/path/to/image.jpg",
+        image: `${process.env.NEXT_PUBLIC_SERVER_URL}${aboutImage.image.data.attributes.formats.medium.url}`,
         bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. At urna condimentum mattis pellentesque. Dolor sit amet consectetur adipiscing. Blandit turpis cursus in hac. Nec tincidunt praesent semper feugiat nibh. Viverra suspendisse potenti nullam ac tortor vitae. Netus et malesuada fames ac turpis egestas maecenas. Lacinia at quis risus sed. Enim nunc faucibus a pellentesque sit amet porttitor eget. Massa id neque aliquam vestibulum morbi. Augue eget arcu dictum varius duis.",
     };
     const linkCards = [
