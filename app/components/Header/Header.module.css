@@ -11,6 +11,8 @@
 
 .logo {
     flex-grow: 1;
+    max-width: 75px;
+    padding: 10px 0;
 }
 
 .header nav ul {
