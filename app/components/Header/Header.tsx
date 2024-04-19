@@ -7,12 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
 
-interface NavItem {
+export interface NavItem {
     text: string;
     link: string;
 }
 
-interface Logo {
+export interface Logo {
     alt: string;
     url: string;
 }
@@ -47,9 +47,12 @@ export default function Header() {
         setIsMobileMenuOpen(false);
     };
 
-    const renderNavItems = (items: NavItem[]) => 
+    const renderNavItems = (items: NavItem[]) =>
         items.map((item, index) => (
-            <li key={index} className={pathName == item.link ? styles.active : ""}>
+            <li
+                key={index}
+                className={pathName == item.link ? styles.active : ""}
+            >
                 <a href={item.link}>{item.text}</a>
             </li>
         ));
@@ -62,9 +65,7 @@ export default function Header() {
                         {logo && <img src={logo.url} alt={logo.alt} />}
                     </div>
                     <nav>
-                        <ul>
-                            {renderNavItems(navItems)}
-                        </ul>
+                        <ul>{renderNavItems(navItems)}</ul>
                     </nav>
                     <button
                         className={styles.hamburger}
@@ -81,9 +82,7 @@ export default function Header() {
                                 <FontAwesomeIcon icon={faTimes} />
                             </button>
                             <div className={styles.hamburgerMenu}>
-                                <ul>
-                                    {renderNavItems(navItems)}
-                                </ul>
+                                <ul>{renderNavItems(navItems)}</ul>
                             </div>
                         </div>
                     )}
@@ -93,8 +92,22 @@ export default function Header() {
     );
 }
 
-// Placeholder function to simulate fetching data from Strapi CMS
 async function getData(): Promise<HeaderProps> {
+    const res = await fetch("/api/header");
+
+    const {
+        attributes: {
+            logo: {
+                altText: logoAltText,
+                image: {
+                    data: {
+                        attributes: { url: logoUrl },
+                    },
+                },
+            },
+        },
+    } = await res.json();
+
     // Replace these with your actual Strapi CMS calls
     const navItems: NavItem[] = [
         { text: "Home", link: "/" },
@@ -102,7 +115,11 @@ async function getData(): Promise<HeaderProps> {
         { text: "Projects", link: "/projects" },
         { text: "Resume", link: "/resume" },
     ];
-    const logo: Logo = { alt: "Logo", url: "/path/to/logo.png" };
+
+    const logo: Logo = {
+        alt: logoAltText,
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}${logoUrl}`,
+    };
 
     return { navItems, logo };
 }
