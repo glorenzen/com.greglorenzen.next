@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 
 :root {
-    --primary-color: #D87B4F;
-    --primary-color-light: #E19A79;
-    --secondary-color: #82ADE4;
-    --secondary-color-light: #9EBFEA;
-    --success-color: #28A745;
-    --info-color: #17A2B8;
-    --warning-color: #FFC107;
-    --danger-color: #DC3545;
-    --light-color: #F8F9FA;
-    --dark-color: #343A40;
+    --primary-color: #d87b4f;
+    --primary-color-light: #e19a79;
+    --secondary-color: #82ade4;
+    --secondary-color-light: #9ebfea;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
 }
 
 html {
@@ -21,16 +21,21 @@ html {
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", sans-serif;
     line-height: 1.2em;
 }
 
 h1 {
-    font-size: 2.986rem
+    font-size: 2.986rem;
 }
 h2 {
     font-size: 2.488rem;
@@ -49,7 +54,23 @@ h6 {
 }
 
 p {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 1rem;
     line-height: 1.6em;
+}
+
+@media (max-width: 1024px) {
+    html {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1.75rem;
+    }
 }
