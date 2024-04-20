@@ -55,7 +55,7 @@ export default function Home() {
             const hero = {
                 name: greg.name,
                 jobTitle: greg.title,
-                backgroundImage: "/path/to/background.jpg",
+                backgroundImage: `${process.env.NEXT_PUBLIC_SERVER_URL}${heroBackgroundImage.data.attributes.url}`,
             };
             const about = {
                 image: `${process.env.NEXT_PUBLIC_SERVER_URL}${greg.photo.image.data.attributes.formats.medium.url}`,
@@ -98,13 +98,18 @@ export default function Home() {
                 <section
                     className={styles.hero}
                     style={{
-                        backgroundImage: `url(${data.hero.backgroundImage})`,
+                        background: `url(${data.hero.backgroundImage}), linear-gradient(135deg, rgba(131, 174, 228, 1.0), rgba(24, 50, 83, 1.0))`,
+                        backgroundSize: "cover",
                     }}
                 >
                     <Container>
                         <h1 className={styles.name}>{data.hero.name}</h1>
                         <h2 className={styles.title}>{data.hero.jobTitle}</h2>
-                        <Button variant="primary" href="/resume" alignment="center">
+                        <Button
+                            variant="primary"
+                            href="/resume"
+                            alignment="center"
+                        >
                             Resume
                         </Button>
                     </Container>
