@@ -52,8 +52,6 @@ export default function Home() {
                 attributes: { greg },
             } = await personRes.json();
 
-            console.log(greg);
-
             const hero = {
                 name: greg.name,
                 jobTitle: greg.title,
@@ -97,19 +95,21 @@ export default function Home() {
         <div>
             <Header />
             <main className={styles.home}>
-                <Container>
-                    <section
-                        className={styles.hero}
-                        style={{
-                            backgroundImage: `url(${data.hero.backgroundImage})`,
-                        }}
-                    >
+                <section
+                    className={styles.hero}
+                    style={{
+                        backgroundImage: `url(${data.hero.backgroundImage})`,
+                    }}
+                >
+                    <Container>
                         <h1 className={styles.name}>{data.hero.name}</h1>
                         <h2 className={styles.title}>{data.hero.jobTitle}</h2>
-                        <Button variant="primary" href="/resume">
+                        <Button variant="primary" href="/resume" alignment="center">
                             Resume
                         </Button>
-                    </section>
+                    </Container>
+                </section>
+                <Container>
                     <section className={styles.about}>
                         <Image
                             src={data.about.image}
