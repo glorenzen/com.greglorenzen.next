@@ -1,12 +1,19 @@
+.buttonWrapper {
+    display: flex;
+}
+
 .button {
     font-family: "Oswald", sans-serif;
     font-size: 22px;
     border: none;
     border-radius: 50px;
     padding: 0.75rem 2rem;
-    color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.buttonWrapper a {
+    color: white;
     text-decoration: none;
 }
 
@@ -24,4 +31,16 @@
 
 .secondary:hover {
     background-color: var(--secondary-color-light);
+}
+
+.left {
+    justify-content: left;
+}
+
+.center {
+    justify-content: center;
+}
+
+.right {
+    justify-content: right;
 }
