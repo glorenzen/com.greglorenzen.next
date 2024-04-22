@@ -6,8 +6,8 @@ import { Chrono } from "react-chrono";
 export interface TimelineItem {
     title: string;
     cardTitle: string;
-    cardSubtitle: string;
-    cardDetailedText: string;
+    cardSubtitle?: string;
+    cardDetailedText?: string;
 }
 
 interface TimelineProps {
