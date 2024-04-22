@@ -27,7 +27,9 @@ const LinkCard: React.FC<LinkCardProps> = ({
             <h3 className={styles.title}>{title}</h3>
             <Image src={image} alt={title} height={height} width={width} />
             <p>{text}</p>
-            <Button variant="secondary">{buttonText}</Button>
+            <div className={styles.button}>
+                <Button variant="secondary">{buttonText}</Button>
+            </div>
         </Link>
     );
 };
