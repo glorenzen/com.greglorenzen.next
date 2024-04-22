@@ -43,7 +43,7 @@ export default function Home() {
             const homeRes = await fetch("/api/homepage");
 
             const {
-                attributes: { heroBackgroundImage },
+                attributes: { heroBackgroundImage, linkCards: homeLinkCards },
             } = await homeRes.json();
 
             const personRes = await fetch("/api/greglorenzen");
@@ -61,29 +61,14 @@ export default function Home() {
                 image: `${process.env.NEXT_PUBLIC_SERVER_URL}${greg.photo.image.data.attributes.formats.medium.url}`,
                 bio: greg.bio,
             };
-            const linkCards = [
-                {
-                    title: "Card 1",
-                    image: "/path/to/image1.jpg",
-                    text: "Text 1",
-                    buttonText: "Button 1",
-                    buttonLink: "/link1",
-                },
-                {
-                    title: "Card 2",
-                    image: "/path/to/image2.jpg",
-                    text: "Text 2",
-                    buttonText: "Button 2",
-                    buttonLink: "/link2",
-                },
-                {
-                    title: "Card 3",
-                    image: "/path/to/image3.jpg",
-                    text: "Text 3",
-                    buttonText: "Button 3",
-                    buttonLink: "/link3",
-                },
-            ];
+
+            const linkCards: LinkCard[] = homeLinkCards.map((card: any) => ({
+                title: card.title as string,
+                image: `${process.env.NEXT_PUBLIC_SERVER_URL}${card.image.image.data.attributes.url}`,
+                text: card.description as string,
+                buttonText: card.button.text,
+                buttonLink: card.button.url,
+            }));
 
             setData({ hero, about, linkCards });
         }
@@ -133,6 +118,8 @@ export default function Home() {
                                 text={card.text}
                                 buttonLink={card.buttonLink}
                                 buttonText={card.buttonText}
+                                width={100}
+                                height={100}
                             />
                         ))}
                     </section>
