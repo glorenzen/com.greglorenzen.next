@@ -4,8 +4,12 @@
     margin: 0 auto;
 }
 
+.wide {
+    max-width: 1400px;
+}
+
 @media (max-width: 1024px) {
-    .container {
+    .container, .wide {
         max-width: 80%;
     }
 }
