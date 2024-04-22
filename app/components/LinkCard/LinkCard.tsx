@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Button from "../Button/Button";
 import styles from "./LinkCard.module.css";
+import Image from "next/image";
 
 interface LinkCardProps {
     title: string;
@@ -8,6 +9,8 @@ interface LinkCardProps {
     text: string;
     buttonLink: string;
     buttonText: string;
+    width: number;
+    height: number;
 }
 
 const LinkCard: React.FC<LinkCardProps> = ({
@@ -16,11 +19,13 @@ const LinkCard: React.FC<LinkCardProps> = ({
     text,
     buttonLink,
     buttonText,
+    width,
+    height,
 }) => {
     return (
         <Link href={buttonLink} className={styles.linkCard}>
             <h3 className={styles.title}>{title}</h3>
-            <img src={image} alt={title} />
+            <Image src={image} alt={title} height={height} width={width} />
             <p>{text}</p>
             <Button variant="secondary">{buttonText}</Button>
         </Link>
