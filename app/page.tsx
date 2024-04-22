@@ -88,6 +88,7 @@ export default function Home() {
                     }}
                 >
                     <Container>
+                        <div className={styles.heroContent}>
                         <h1 className={styles.name}>{data.hero.name}</h1>
                         <h2 className={styles.title}>{data.hero.jobTitle}</h2>
                         <Button
@@ -97,7 +98,9 @@ export default function Home() {
                         >
                             Resume
                         </Button>
+                        </div>
                     </Container>
+                    
                 </section>
                 <Container>
                     <section className={styles.about}>

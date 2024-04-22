@@ -16,7 +16,6 @@
 .hero h1,
 .hero h2 {
     margin: 0;
-    color: #fff;
 }
 
 .hero .name {
@@ -25,6 +24,12 @@
 
 .hero .title {
     margin-bottom: 40px;
+}
+
+.hero .heroContent {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 25px;
 }
 
 .about {
@@ -49,16 +54,13 @@
 }
 
 .linkCards {
-    display: flex;
-    justify-content: space-between;
-    gap: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(240px,(100% - 60px) / 4), 1fr));
+    grid-gap: 25px;
 }
 
 @media (max-width: 1024px) {
     .about .bio {
         max-width: 100%;
-    }
-    .linkCards {
-        flex-direction: column;
     }
 }
