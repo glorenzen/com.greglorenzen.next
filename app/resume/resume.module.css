@@ -1,0 +1,22 @@
+.resume .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.timeline, .skills {
+    padding: 20px;
+}
+
+.hero {
+    width: 100%;
+    background-image: url('/path/to/image.jpg');
+    background-size: cover;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .resume .grid {
+        grid-template-columns: 1fr;
+    }
+}
