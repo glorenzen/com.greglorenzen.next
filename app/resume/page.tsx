@@ -1,7 +1,7 @@
 "use client";
 
 // Import necessary libraries and components
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Container from "../components/Container/Container";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
@@ -12,10 +12,19 @@ export default function Resume() {
     // Create state variables with placeholder data
     const [title, setTitle] = useState("Resume");
     const [timelineItems, setTimelineItems] = useState<TimelineItem[]>([
-        { title: "2020 - Present", cardTitle: "Software Engineer at XYZ" },
-        { title: "2018 - 2020", cardTitle: "Junior Developer at ABC" }
+        {
+            title: "2020 - Present",
+            cardTitle: "Software Engineer at XYZ",
+            timelineContent:
+                "- Manage all IT/development work.\n- Developed custom experiential marketing applications for clients including Amazon, Bunim Murray Productions, and Dallas Cowboys. Applications were built using modern web technologies including NodeJS and ReactJS.\n- Support design team in developing websites for “Main Street” clients. Development support on websites often includes developing WordPress plugins as well as custom CSS and JS.\n",
+        },
+        { title: "2018 - 2020", cardTitle: "Junior Developer at ABC" },
     ]);
-    const [skills, setSkills] = useState<string[]>(["JavaScript", "React", "Node.js"]);
+    const [skills, setSkills] = useState<string[]>([
+        "JavaScript",
+        "React",
+        "Node.js",
+    ]);
 
     // Fetch data from Strapi
     useEffect(() => {
