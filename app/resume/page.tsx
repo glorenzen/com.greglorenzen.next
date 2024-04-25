@@ -11,15 +11,7 @@ import styles from "./resume.module.css";
 export default function Resume() {
     // Create state variables with placeholder data
     const [title, setTitle] = useState("Resume");
-    const [timelineItems, setTimelineItems] = useState<TimelineItem[]>([
-        {
-            title: "2020 - Present",
-            cardTitle: "Software Engineer at XYZ",
-            timelineContent:
-                "- Manage all IT/development work.\n- Developed custom experiential marketing applications for clients including Amazon, Bunim Murray Productions, and Dallas Cowboys. Applications were built using modern web technologies including NodeJS and ReactJS.\n- Support design team in developing websites for “Main Street” clients. Development support on websites often includes developing WordPress plugins as well as custom CSS and JS.\n",
-        },
-        { title: "2018 - 2020", cardTitle: "Junior Developer at ABC" },
-    ]);
+    const [timelineItems, setTimelineItems] = useState<TimelineItem[]>();
     const [skills, setSkills] = useState<string[]>([
         "JavaScript",
         "React",
@@ -28,10 +20,18 @@ export default function Resume() {
 
     // Fetch data from Strapi
     useEffect(() => {
-        // Commented out fetch calls to be replaced with actual API calls
-        // fetch('/api/title').then(response => response.json()).then(data => setTitle(data));
-        // fetch('/api/timelineItems').then(response => response.json()).then(data => setTimelineItems(data));
-        // fetch('/api/skills').then(response => response.json()).then(data => setSkills(data));
+        fetch("/api/jobs")
+            .then((response) => response.json())
+            .then((data) =>
+                setTimelineItems(
+                    data.map((item: any) => ({
+                        title: item.attributes.dates,
+                        cardTitle: item.attributes.companyName,
+                        cardSubtitle: item.attributes.jobTitle,
+                        timelineContent: item.attributes.jobDescription,
+                    }))
+                )
+            );
     }, []);
 
     return (
@@ -45,7 +45,7 @@ export default function Resume() {
                     <div className={styles.grid}>
                         <div className={styles.timeline}>
                             <h2>Resume</h2>
-                            <Timeline items={timelineItems} />
+                            {timelineItems ? <Timeline items={timelineItems} /> : null}
                         </div>
                         <div className={styles.skills}>
                             <h2>Skills</h2>
