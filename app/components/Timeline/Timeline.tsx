@@ -45,7 +45,7 @@ const Timeline: React.FC<TimelineProps> = ({
                 theme={theme}
                 disableInteraction
                 disableToolbar
-                cardHeight="auto"
+                cardHeight={400}
             >
                 {items.map((item, index) => (
                     <div key={index} className={styles.timelineItem}>
