@@ -1,13 +1,9 @@
-"use client";
-
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 import Container from "./components/Container/Container";
 import styles from "./page.module.css";
 import Button from "./components/Button/Button";
 import LinkCard from "./components/LinkCard/LinkCard";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { revalidatePath } from "next/cache";
 
 interface Hero {
     name: string;
@@ -34,51 +30,11 @@ interface Data {
     linkCards: LinkCard[];
 }
 
-export default function Home() {
-    const [data, setData] = useState<Data>();
-
-    useEffect(() => {
-        async function fetchData() {
-            // Fetch data from Strapi
-            const homeRes = await fetch("/api/homepage");
-
-            const {
-                attributes: { heroBackgroundImage, linkCards: homeLinkCards },
-            } = await homeRes.json();
-
-            const personRes = await fetch("/api/greglorenzen");
-
-            const {
-                attributes: { greg },
-            } = await personRes.json();
-
-            const hero = {
-                name: greg.name,
-                jobTitle: greg.title,
-                backgroundImage: `${process.env.NEXT_PUBLIC_SERVER_URL}${heroBackgroundImage.data.attributes.url}`,
-            };
-            const about = {
-                image: `${process.env.NEXT_PUBLIC_SERVER_URL}${greg.photo.image.data.attributes.formats.medium.url}`,
-                bio: greg.bio,
-            };
-
-            const linkCards: LinkCard[] = homeLinkCards.map((card: any) => ({
-                title: card.title as string,
-                image: `${process.env.NEXT_PUBLIC_SERVER_URL}${card.image.image.data.attributes.url}`,
-                text: card.description as string,
-                buttonText: card.button.text,
-                buttonLink: card.button.url,
-            }));
-
-            setData({ hero, about, linkCards });
-        }
-
-        fetchData();
-    }, []);
+export default async function Home() {
+    const data = await getData();
 
     return data ? (
         <div>
-            <Header />
             <main className={styles.home}>
                 <section
                     className={styles.hero}
@@ -89,18 +45,19 @@ export default function Home() {
                 >
                     <Container>
                         <div className={styles.heroContent}>
-                        <h1 className={styles.name}>{data.hero.name}</h1>
-                        <h2 className={styles.title}>{data.hero.jobTitle}</h2>
-                        <Button
-                            variant="primary"
-                            href="/resume"
-                            alignment="center"
-                        >
-                            Resume
-                        </Button>
+                            <h1 className={styles.name}>{data.hero.name}</h1>
+                            <h2 className={styles.title}>
+                                {data.hero.jobTitle}
+                            </h2>
+                            <Button
+                                variant="primary"
+                                href="/resume"
+                                alignment="center"
+                            >
+                                Resume
+                            </Button>
                         </div>
                     </Container>
-                    
                 </section>
                 <Container>
                     <section className={styles.about}>
@@ -128,7 +85,63 @@ export default function Home() {
                     </section>
                 </Container>
             </main>
-            <Footer />
         </div>
     ) : null;
+}
+
+async function getData(): Promise<Data> {
+    // Define the URLs
+    const homePageUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/home-page?populate=heroBackgroundImage&populate=linkCards&populate=linkCards.button&populate=linkCards.image&populate=linkCards.image.image`;
+    const personUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/greg-lorenzen?populate[0]=greg&populate[1]=greg.photo&populate[2]=greg.photo.image`;
+
+    // Revalidate the paths
+    revalidatePath(homePageUrl);
+    revalidatePath(personUrl);
+
+    // Fetch data from Strapi
+    const homeRes = await fetch(homePageUrl, {
+        headers: {
+            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+    });
+
+    const {
+        data: {
+            attributes: { heroBackgroundImage, linkCards: homeLinkCards },
+        },
+    } = await homeRes.json();
+
+    const personRes = await fetch(personUrl, {
+        headers: {
+            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+    });
+
+    const {
+        data: {
+            attributes: { greg },
+        },
+    } = await personRes.json();
+
+    const hero = {
+        name: greg.name,
+        jobTitle: greg.title,
+        backgroundImage: `${process.env.NEXT_PUBLIC_SERVER_URL}${heroBackgroundImage.data.attributes.url}`,
+    };
+    const about = {
+        image: `${process.env.NEXT_PUBLIC_SERVER_URL}${greg.photo.image.data.attributes.formats.medium.url}`,
+        bio: greg.bio,
+    };
+
+    const linkCards: LinkCard[] = homeLinkCards.map((card: any) => ({
+        title: card.title as string,
+        image: `${process.env.NEXT_PUBLIC_SERVER_URL}${card.image.image.data.attributes.url}`,
+        text: card.description as string,
+        buttonText: card.button.text,
+        buttonLink: card.button.url,
+    }));
+
+    const data = { hero, about, linkCards };
+
+    return data;
 }
