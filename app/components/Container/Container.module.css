@@ -1,11 +1,7 @@
 .container {
-    max-width: 1140px;
+    max-width: 1440px;
     width: 80%;
     margin: 0 auto;
-}
-
-.wide {
-    max-width: 1400px;
 }
 
 @media (max-width: 1024px) {
