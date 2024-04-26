@@ -4,27 +4,34 @@ import React from "react";
 import TitleHeading from "../components/TitleHeading/TitleHeading";
 import { revalidatePath } from "next/cache";
 import Container from "../components/Container/Container";
+import Link from "next/link";
 
 interface ProjectGridProps {
-    projects: { image: string; title: string }[];
+    projects: { image: string; title: string; slug: string }[];
 }
 
 const ProjectGrid: React.FC<ProjectGridProps> = ({ projects }) => (
     <div className={styles.projectGrid}>
         {projects.map((project, index) => (
-            <div key={index} className={styles.project}>
-                <div className={styles.projectImage}>
-                    <Image
-                        src={project.image}
-                        alt={project.title}
-                        width={1024}
-                        height={768}
-                       
-                    />
-                </div>
-                <div className={styles.title}>
-                    <h2>{project.title}</h2>
-                </div>
+            <div key={index}>
+                <Link
+                    href={`/projects/${project.slug}`}
+                    className={styles.projectLink}
+                >
+                    <div className={styles.projectCard}>
+                        <div className={styles.projectImage}>
+                            <Image
+                                src={project.image}
+                                alt={project.title}
+                                width={1024}
+                                height={768}
+                            />
+                        </div>
+                        <div className={styles.title}>
+                            <h2>{project.title}</h2>
+                        </div>
+                    </div>
+                </Link>
             </div>
         ))}
     </div>
@@ -77,6 +84,7 @@ async function getData() {
         projects: projects.map((project: any) => ({
             image: `${process.env.NEXT_PUBLIC_SERVER_URL}${project.attributes.featuredImage.image.data.attributes.url}`,
             title: project.attributes.title,
+            slug: project.attributes.slug,
         })),
         globalData,
     };

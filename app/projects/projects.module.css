@@ -5,7 +5,12 @@
     padding: 20px 0;
 }
 
-.project {
+.projectLink {
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
+.projectCard {
     width: 100%;
     max-width: 100%;
     display: flex;
@@ -33,7 +38,7 @@
     object-fit: cover;
 }
 
-.project .title {
+.projectCard .title {
     flex: 1;
     padding: 30px;
     display: flex;
@@ -41,7 +46,7 @@
     justify-content: center;
 }
 
-.project .title h2 {
+.projectCard .title h2 {
     margin: 0;
     padding: 0;
     font-size: 1.35rem;
