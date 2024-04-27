@@ -1,0 +1,16 @@
+.hero {
+    background-color: #f0f0f0;
+}
+
+.heroContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.heroContent .title,
+.heroContent .featuredImage {
+    flex: 1 1 50%;
+    min-width: 300px;
+    position: relative;
+}
