@@ -1,0 +1,18 @@
+.masonry {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 1em;
+}
+
+.masonryItem {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.masonryItem img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
