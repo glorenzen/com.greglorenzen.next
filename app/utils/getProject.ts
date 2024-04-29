@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 
 export async function getProject(slug: string) {
-    const projectUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/projects?filters[slug][$eq]=${slug}&populate=featuredImage.image`;
+    const projectUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/projects?filters[slug][$eq]=${slug}&populate=featuredImage.image&populate=gallery.image`;
 
     revalidatePath(projectUrl);
 
@@ -21,5 +21,6 @@ export async function getProject(slug: string) {
         image: `${process.env.NEXT_PUBLIC_SERVER_URL}${projects[0].attributes.featuredImage.image.data.attributes.url}`,
         title: projects[0].attributes.title,
         content: projects[0].attributes.content,
+        gallery: projects[0].attributes.gallery
     };
 }

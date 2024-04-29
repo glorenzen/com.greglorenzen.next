@@ -6,6 +6,7 @@ import { getProject } from "@/app/utils/getProject";
 import styles from "./project.module.css";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
+import MasonryGallery from "@/app/components/MasonryGallery/MasonryGallery";
 
 export default async function Project({
     params,
@@ -37,9 +38,23 @@ export default async function Project({
                     </div>
                 </Container>
             </div>
-            <Container thin>
-                <div className={styles.content}><Markdown>{project.content}</Markdown></div>
-            </Container>
+            <div className={styles.content}>
+                <Container thin>
+                    <Markdown>{project.content}</Markdown>
+                </Container>
+                <div className={styles.gallery}>
+                    <Container>
+                        <MasonryGallery
+                            images={project.gallery.map(
+                                (galleryImage: any) => ({
+                                    url: `${process.env.NEXT_PUBLIC_SERVER_URL}${galleryImage.image.data.attributes.url}`,
+                                    alt: galleryImage.altText,
+                                })
+                            )}
+                        />
+                    </Container>
+                </div>
+            </div>
         </>
     );
 }
