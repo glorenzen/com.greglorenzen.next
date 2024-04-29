@@ -22,9 +22,9 @@ export default async function Project({
                 <Container>
                     <div className={styles.heroContent}>
                         <div className={styles.title}>
-                            <small>
+                            <div className={styles.projectsLink}>
                                 <Link href="/projects">Projects</Link>
-                            </small>
+                            </div>
                             <h1>{project.title}</h1>
                         </div>
                         <div className={styles.featuredImage}>
@@ -37,8 +37,8 @@ export default async function Project({
                     </div>
                 </Container>
             </div>
-            <Container>
-                <Markdown>{project.content}</Markdown>
+            <Container thin>
+                <div className={styles.content}><Markdown>{project.content}</Markdown></div>
             </Container>
         </>
     );
