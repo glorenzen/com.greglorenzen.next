@@ -1,6 +1,9 @@
 .projectGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(max(500px, (100% - 60px) / 4), 1fr)
+    );
     gap: 20px;
     padding: 20px 0;
 }
@@ -50,4 +53,17 @@
     margin: 0;
     padding: 0;
     font-size: 1.35rem;
+}
+
+@media screen and (max-width: 768px) {
+    .projectGrid {
+        grid-template-columns: repeat(
+            auto-fill,
+            minmax(max(300px, (100% - 40px) / 2), 1fr)
+        );
+    }
+
+    .projectCard {
+        flex-direction: column;
+    }
 }
