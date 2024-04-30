@@ -10,7 +10,7 @@ const MasonryGallery: React.FC<MasonryGalleryProps> = ({ images }) => {
     return (
         <div className={styles.masonry}>
             {images.map((image, index) => (
-                <div className={styles.masonryItem}>
+                <div className={styles.masonryItem} key={index}>
                     <Image
                         key={index}
                         src={image.url}
