@@ -5,6 +5,7 @@ import TitleHeading from "../components/TitleHeading/TitleHeading";
 import { revalidatePath } from "next/cache";
 import Container from "../components/Container/Container";
 import Link from "next/link";
+import { getGlobal } from "../utils/getGlobal";
 
 interface ProjectGridProps {
     projects: { image: string; title: string; slug: string }[];
@@ -38,12 +39,15 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({ projects }) => (
 );
 
 export default async function Projects() {
-    const { projects, globalData: global } = await getData();
+    const {
+        projects,
+        globalData: { titleHeadingBackground },
+    } = await getData();
 
     return (
         <>
             <TitleHeading
-                backgroundImage={`${process.env.NEXT_PUBLIC_SERVER_URL}${global.attributes.titleHeadingBackground.data.attributes.url}`}
+                backgroundImage={`${process.env.NEXT_PUBLIC_SERVER_URL}${titleHeadingBackground}`}
                 title="Projects"
             />
             <Container>
@@ -55,10 +59,8 @@ export default async function Projects() {
 
 async function getData() {
     const projectUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/projects?populate=featuredImage.image`;
-    const globalUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/global?populate=*`;
 
     revalidatePath(projectUrl);
-    revalidatePath(globalUrl);
 
     const projectResponse = await fetch(projectUrl, {
         headers: {
@@ -70,13 +72,7 @@ async function getData() {
         throw new Error("Failed to fetch projects");
     }
 
-    const globalRes = await fetch(globalUrl, {
-        headers: {
-            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-        },
-    });
-
-    const { data: globalData } = await globalRes.json();
+    const globalData = await getGlobal();
 
     const { data: projects } = await projectResponse.json();
 

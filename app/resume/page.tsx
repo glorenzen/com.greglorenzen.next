@@ -5,6 +5,7 @@ import styles from "./resume.module.css";
 import Markdown from "react-markdown";
 import TitleHeading from "../components/TitleHeading/TitleHeading";
 import { revalidatePath } from "next/cache";
+import { getGlobal } from "../utils/getGlobal";
 
 interface ExperienceItem {
     dates: string;
@@ -22,14 +23,17 @@ interface Data {
 export default async function Resume() {
     const data = await getData();
 
-    const { experienceItems, skills, globalData: global } = data;
+    const {
+        experienceItems,
+        skills,
+        globalData: { titleHeadingBackground },
+    } = data;
 
     return (
         <div>
             <TitleHeading
                 title="Resume"
-                backgroundImage={`${process.env.NEXT_PUBLIC_SERVER_URL}${global.attributes.titleHeadingBackground.data.attributes.url}`}
-                
+                backgroundImage={`${process.env.NEXT_PUBLIC_SERVER_URL}${titleHeadingBackground}`}
             />
             <main className={styles.resume}>
                 <Container>
@@ -68,10 +72,8 @@ export default async function Resume() {
 
 async function getData(): Promise<Data> {
     const jobUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/jobs?populate=jobDescription`;
-    const globalUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/global?populate=*`;
 
     revalidatePath(jobUrl);
-    revalidatePath(globalUrl);
 
     const jobsRes = await fetch(jobUrl, {
         headers: {
@@ -79,13 +81,7 @@ async function getData(): Promise<Data> {
         },
     });
 
-    const globalRes = await fetch(globalUrl, {
-        headers: {
-            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-        },
-    });
-
-    const { data: globalData } = await globalRes.json();
+    const globalData = await getGlobal();
 
     const { data: jobData } = await jobsRes.json();
 
