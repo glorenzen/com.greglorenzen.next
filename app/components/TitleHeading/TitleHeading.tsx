@@ -13,7 +13,7 @@ const TitleHeading: React.FC<TitleHeadingProps> = ({
     <div
         className={styles.titleHeading}
         style={{
-            backgroundImage: ` url(${backgroundImage}), linear-gradient(to right, rgb(142 171 199 / 70%), rgb(12 50 77 / 70%))`,
+            backgroundImage: ` url(${backgroundImage}), linear-gradient(to right, var(--primary-color-light), var(--primary-color))`,
             backgroundSize: "cover",
         }}
     >
