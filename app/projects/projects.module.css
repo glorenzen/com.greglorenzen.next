@@ -21,7 +21,7 @@
     gap: 0;
     overflow: hidden;
     border-radius: 10px;
-    background-color: #f7efda;
+    background-color: var(--light-gray-orange);
     transition: all 1s ease-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -65,7 +65,7 @@
     .projectCard {
         background: linear-gradient(
             to left,
-            #f7efda 50%,
+            var(--light-gray-orange) 50%,
             var(--primary-color) 50%
         );
         background-size: 200% 100%;
