@@ -1,5 +1,5 @@
 .hero {
-    background-color: #f0f0f0;
+    background-color: var(--light-gray-blue);
     padding-top: 50px;
 }
 
@@ -20,6 +20,13 @@
     justify-content: center;
     flex: 1 1 50%;
     position: relative;
+}
+
+.heroContent .title .projectsLink {
+    width: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
 }
 
 .heroContent .title .projectsLink a {
