@@ -129,7 +129,7 @@ async function getData(): Promise<Data> {
         backgroundImage: `${process.env.NEXT_PUBLIC_SERVER_URL}${heroBackgroundImage.data.attributes.url}`,
     };
     const about = {
-        image: `${process.env.NEXT_PUBLIC_SERVER_URL}${greg.photo.image.data.attributes.formats.medium.url}`,
+        image: `${process.env.NEXT_PUBLIC_SERVER_URL}${greg.photo.image.data.attributes.url}`,
         bio: greg.bio,
     };
 
