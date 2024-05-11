@@ -1,0 +1,24 @@
+.twoColumn {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px 0;
+}
+
+.leftColumn,
+.rightColumn {
+    flex: 1 0 100%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+    .leftColumn,
+    .rightColumn {
+        flex: 1;
+    }
+}
+
+.rightColumn {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
