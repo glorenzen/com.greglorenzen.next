@@ -20,7 +20,7 @@ export default async function Contact() {
             <Container>
                 <div className={styles.twoColumn}>
                     <div className={styles.leftColumn}>
-                        <h1>{heading}</h1> {/* Set the heading value */}
+                        <h2>{heading}</h2> {/* Set the heading value */}
                         <p>{ctaText}</p>
                     </div>
                     <div className={styles.rightColumn}>
