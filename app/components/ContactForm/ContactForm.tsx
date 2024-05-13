@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ContactForm.module.css";
 import { sendEmail } from "../../utils/mailgun";
+import { redirect } from "next/navigation";
 
 const ContactForm: React.FC = () => {
     const handleSubmit = async (formData: FormData) => {
@@ -31,6 +32,9 @@ const ContactForm: React.FC = () => {
             text: "I've received your email and I will get back to you as soon as possible!",
             "h:Reply-To": "gregorylorenzen@gmail.com",
         });
+
+        // Redirect to the thank you page
+        redirect("/thank-you");
     };
 
     return (
