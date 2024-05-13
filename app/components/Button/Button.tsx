@@ -6,6 +6,7 @@ interface ButtonProps {
     children: React.ReactNode;
     href?: string;
     alignment?: "left" | "center" | "right";
+    type?: "button" | "submit" | "reset";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -13,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
     children,
     href,
     alignment,
+    type = "button",
 }) => {
     return href ? (
         <div
@@ -28,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
         </div>
     ) : (
         <button
+            type={type}
             className={`${styles.button} ${styles[variant]} ${
                 alignment ? styles[alignment] : "left"
             }`}
