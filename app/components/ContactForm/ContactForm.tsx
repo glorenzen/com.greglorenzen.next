@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ContactForm.module.css";
 import { sendEmail } from "../../utils/mailgun";
 import { redirect } from "next/navigation";
+import Button from "../Button/Button";
 
 const ContactForm: React.FC = () => {
     const handleSubmit = async (formData: FormData) => {
@@ -83,7 +84,9 @@ const ContactForm: React.FC = () => {
                 <textarea id="message" name="message" required />
             </div>
 
-            <button type="submit">Submit</button>
+            <Button type="submit" variant="primary">
+                Submit
+            </Button>
         </form>
     );
 };
