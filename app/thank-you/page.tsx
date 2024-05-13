@@ -3,6 +3,7 @@ import TitleHeading from "../components/TitleHeading/TitleHeading";
 import { getGlobal } from "../utils/getGlobal";
 import Container from "../components/Container/Container";
 import { getThankYouPage } from "../utils/getThankYouPage";
+import styles from "./thankYou.module.css";
 
 export default async function ThankYou() {
     const {
@@ -17,7 +18,7 @@ export default async function ThankYou() {
                 backgroundImage={`${process.env.NEXT_PUBLIC_SERVER_URL}${titleHeadingBackground}`}
             />
             <Container>
-                <div>{thankYouText}</div>
+                <div className={styles.thankYouText}>{thankYouText}</div>
             </Container>
         </div>
     );
