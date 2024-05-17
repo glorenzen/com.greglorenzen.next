@@ -5,6 +5,7 @@ import LinkCard from "./components/LinkCard/LinkCard";
 import Image from "next/image";
 import { revalidatePath } from "next/cache";
 import Markdown from "react-markdown";
+import { getPerson } from "./utils/getPerson";
 
 interface Hero {
     name: string;
@@ -68,7 +69,9 @@ export default async function Home() {
                             height={200}
                             alt={data.hero.name}
                         />
-                        <div className={styles.bio}><Markdown>{data.about.bio}</Markdown></div>
+                        <div className={styles.bio}>
+                            <Markdown>{data.about.bio}</Markdown>
+                        </div>
                     </section>
                     <section className={styles.linkCards}>
                         {data.linkCards.map((card, index) => (
@@ -93,11 +96,9 @@ export default async function Home() {
 async function getData(): Promise<Data> {
     // Define the URLs
     const homePageUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/home-page?populate=heroBackgroundImage&populate=linkCards&populate=linkCards.button&populate=linkCards.image&populate=linkCards.image.image`;
-    const personUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/greg-lorenzen?populate[0]=greg&populate[1]=greg.photo&populate[2]=greg.photo.image`;
 
     // Revalidate the paths
     revalidatePath(homePageUrl);
-    revalidatePath(personUrl);
 
     // Fetch data from Strapi
     const homeRes = await fetch(homePageUrl, {
@@ -112,17 +113,7 @@ async function getData(): Promise<Data> {
         },
     } = await homeRes.json();
 
-    const personRes = await fetch(personUrl, {
-        headers: {
-            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-        },
-    });
-
-    const {
-        data: {
-            attributes: { greg },
-        },
-    } = await personRes.json();
+    const greg = await getPerson();
 
     const hero = {
         name: greg.name,
