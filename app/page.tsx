@@ -4,6 +4,7 @@ import Button from "./components/Button/Button";
 import LinkCard from "./components/LinkCard/LinkCard";
 import Image from "next/image";
 import { revalidatePath } from "next/cache";
+import Markdown from "react-markdown";
 
 interface Hero {
     name: string;
@@ -67,7 +68,7 @@ export default async function Home() {
                             height={200}
                             alt={data.hero.name}
                         />
-                        <p className={styles.bio}>{data.about.bio}</p>
+                        <div className={styles.bio}><Markdown>{data.about.bio}</Markdown></div>
                     </section>
                     <section className={styles.linkCards}>
                         {data.linkCards.map((card, index) => (
