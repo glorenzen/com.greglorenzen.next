@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 import TitleHeading from "../components/TitleHeading/TitleHeading";
 import { revalidatePath } from "next/cache";
 import { getGlobal } from "../utils/getGlobal";
+import { getPerson } from "../utils/getPerson";
 
 interface ExperienceItem {
     dates: string;
@@ -85,9 +86,13 @@ async function getData(): Promise<Data> {
 
     const { data: jobData } = await jobsRes.json();
 
+    const greg = await getPerson();
+
+    console.log(greg);
+
     return {
         experienceItems: jobData.map((job: any) => ({ ...job.attributes })),
-        skills: ["Javascript", "NodeJS", "React"],
+        skills: greg.skills.map((skill: any) => skill.skill),
         globalData,
     };
 }
