@@ -6,6 +6,7 @@ import styles from "./Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export interface NavItem {
     text: string;
@@ -22,22 +23,22 @@ interface HeaderProps {
     logo: Logo;
 }
 
+const logo: Logo = {
+    alt: "Greg Lorenzen Logo",
+    url: "/img/greg-lorenzen-logo.svg",
+};
+
+const navItems: NavItem[] = [
+    { text: "Home", link: "/" },
+    { text: "Contact", link: "/contact" },
+    { text: "Projects", link: "/projects" },
+    { text: "Resume", link: "/resume" },
+];
+
 export default function Header() {
-    const [navItems, setNavItems] = useState<NavItem[]>([]);
-    const [logo, setLogo] = useState<Logo | null>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const pathName = usePathname();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await getData();
-            setNavItems(data.navItems);
-            setLogo(data.logo);
-        };
-
-        fetchData();
-    }, []);
 
     const handleHamburgerClick = () => {
         setIsMobileMenuOpen(true);
@@ -62,7 +63,14 @@ export default function Header() {
             <Container>
                 <div className={styles.menuContainer}>
                     <div className={styles.logo}>
-                        {logo && <img src={logo.url} alt={logo.alt} />}
+                        {logo && (
+                            <Image
+                                src={logo.url}
+                                alt={logo.alt}
+                                width={75}
+                                height={75}
+                            />
+                        )}
                     </div>
                     <nav>
                         <ul>{renderNavItems(navItems)}</ul>
@@ -90,36 +98,4 @@ export default function Header() {
             </Container>
         </header>
     );
-}
-
-async function getData(): Promise<HeaderProps> {
-    const res = await fetch("/api/header");
-
-    const {
-        attributes: {
-            logo: {
-                altText: logoAltText,
-                image: {
-                    data: {
-                        attributes: { url: logoUrl },
-                    },
-                },
-            },
-        },
-    } = await res.json();
-
-    // Replace these with your actual Strapi CMS calls
-    const navItems: NavItem[] = [
-        { text: "Home", link: "/" },
-        { text: "Contact", link: "/contact" },
-        { text: "Projects", link: "/projects" },
-        { text: "Resume", link: "/resume" },
-    ];
-
-    const logo: Logo = {
-        alt: logoAltText,
-        url: `${process.env.NEXT_PUBLIC_SERVER_URL}${logoUrl}`,
-    };
-
-    return { navItems, logo };
 }
