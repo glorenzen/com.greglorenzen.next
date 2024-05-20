@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export interface NavItem {
     text: string;
@@ -63,14 +64,14 @@ export default function Header() {
             <Container>
                 <div className={styles.menuContainer}>
                     <div className={styles.logo}>
-                        {logo && (
+                        <Link href="/">
                             <Image
                                 src={logo.url}
                                 alt={logo.alt}
                                 width={75}
                                 height={75}
                             />
-                        )}
+                        </Link>
                     </div>
                     <nav>
                         <ul>{renderNavItems(navItems)}</ul>
