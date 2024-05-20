@@ -33,6 +33,7 @@ export default async function Project({
                                 src={project.image}
                                 alt={project.title}
                                 fill
+                                priority
                             />
                         </div>
                     </div>
