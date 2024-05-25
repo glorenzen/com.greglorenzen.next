@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Container from "../Container/Container";
-import styles from "./Header.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { usePathname } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import Container from "../Container/Container";
+import styles from "./Header.module.css";
 
 export interface NavItem {
     text: string;
@@ -84,15 +84,22 @@ export default function Header() {
                     </button>
                     {isMobileMenuOpen && (
                         <div className={styles.overlay}>
-                            <button
-                                className={styles.close}
-                                onClick={handleMobileMenuClose}
-                            >
-                                <FontAwesomeIcon icon={faTimes} />
-                            </button>
-                            <div className={styles.hamburgerMenu}>
-                                <ul>{renderNavItems(navItems)}</ul>
-                            </div>
+                            <Container>
+                                <div className={styles.overlayItems}>
+                                    <div className={styles.buttonWrapper}>
+                                        <button
+                                            className={styles.close}
+                                            onClick={handleMobileMenuClose}
+                                        >
+                                            <FontAwesomeIcon icon={faTimes} />
+                                        </button>
+                                    </div>
+
+                                    <div className={styles.hamburgerMenu}>
+                                        <ul>{renderNavItems(navItems)}</ul>
+                                    </div>
+                                </div>
+                            </Container>
                         </div>
                     )}
                 </div>

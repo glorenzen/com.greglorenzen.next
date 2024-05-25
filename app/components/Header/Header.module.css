@@ -107,6 +107,7 @@
 
     .overlay {
         display: flex;
+        justify-content: flex-start;
     }
 
     .header nav {
@@ -115,8 +116,19 @@
 
     .close {
         display: block;
-        position: absolute;
-        top: 25px;
-        right: 25px;
+    }
+
+    .buttonWrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        min-height: 99px;
+    }
+
+    .overlayItems {
+        display: flex;
+        flex-direction: column;
+        
+        padding: 1rem 0;
     }
 }
