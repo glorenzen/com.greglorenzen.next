@@ -88,8 +88,6 @@ async function getData(): Promise<Data> {
 
     const greg = await getPerson();
 
-    console.log(greg);
-
     return {
         experienceItems: jobData.map((job: any) => ({ ...job.attributes })),
         skills: greg.skills.map((skill: any) => skill.skill),
