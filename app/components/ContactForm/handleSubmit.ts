@@ -6,8 +6,6 @@ import { redirect } from "next/navigation";
 const handleSubmit = async (formData: FormData) => {
     const rawFormData = Object.fromEntries(formData);
 
-    console.log(rawFormData);
-
     // Send notification email to admin
     await sendEmail({
         to: process.env.ADMIN_EMAIL as string,
