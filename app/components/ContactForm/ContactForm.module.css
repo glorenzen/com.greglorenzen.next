@@ -13,6 +13,7 @@
     flex-direction: column;
     margin-bottom: 20px;
     gap: 5px;
+    justify-content: flex-end;
 }
 
 .formField input,
@@ -24,6 +25,16 @@
 
 .required {
     color: var(--danger-color);
+}
+
+.errorMessage {
+    color: var(--danger-color);
+    font-size: 0.8rem;
+    background-color: #ffe6e6;
+    border: 1px solid var(--danger-color);
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
 }
 
 @media (max-width: 768px) {
