@@ -14,6 +14,7 @@ const schema = z.object({
         .refine((message) => !/(https?:\/\/[^\s]+)/g.test(message), {
             message: "URLs are not allowed in messages.",
         }),
+       faxNumber: z.string().optional().refine(value => value === '', { message: "" })
 });
 
 const submit = async (formData: FormData) => {

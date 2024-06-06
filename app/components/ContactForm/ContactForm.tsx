@@ -95,6 +95,11 @@ const ContactForm: React.FC = () => {
                 <textarea id="message" name="message" required />
             </div>
 
+            <div className={`${styles.formField} ${styles.faxNumber}`}>
+                <label htmlFor="faxNumber">Fax Number</label>
+                <input id="faxNumber" name="faxNumber" type="text" tabIndex={-1} autoComplete="nope"/>
+            </div>
+
             <ReCAPTCHA
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
                 onChange={(value) => {

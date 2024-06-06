@@ -37,6 +37,12 @@
     margin-top: 5px;
 }
 
+/* Honeypot field */
+.faxNumber {
+    position: absolute;
+    left: -9999px;
+}
+
 @media (max-width: 768px) {
     .row {
         flex-direction: column;
