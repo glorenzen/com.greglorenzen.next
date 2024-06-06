@@ -20,6 +20,10 @@ const ContactForm: React.FC = () => {
     };
 
     const getErrorMessage = (field: string) => {
+        if (!errors) {
+            return null;
+        }
+
         const error = errors.find((err) => err.path[0] === field);
         return error ? error.message : null;
     };
