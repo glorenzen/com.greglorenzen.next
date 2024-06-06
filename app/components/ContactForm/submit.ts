@@ -2,9 +2,33 @@
 
 import { sendEmail } from "@/app/utils/mailgun";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 
-const handleSubmit = async (formData: FormData) => {
+const schema = z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+    email: z.string().email(),
+    phone: z.string(),
+    message: z
+        .string()
+        .refine((message) => !/(https?:\/\/[^\s]+)/g.test(message), {
+            message: "URLs are not allowed in messages.",
+        }),
+       faxNumber: z.string().optional().refine(value => value === '', { message: "" })
+});
+
+const submit = async (formData: FormData) => {
     const rawFormData = Object.fromEntries(formData);
+
+    try {
+        // Validate the form data
+        schema.parse(rawFormData);
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            // Return the error messages
+            return error.errors;
+        }
+    }
 
     // Send notification email to admin
     await sendEmail({
@@ -34,4 +58,4 @@ const handleSubmit = async (formData: FormData) => {
     redirect("/thank-you");
 };
 
-export default handleSubmit;
+export default submit;
