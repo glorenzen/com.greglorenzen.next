@@ -82,26 +82,26 @@ export default function Header() {
                     >
                         <FontAwesomeIcon icon={faBars} />
                     </button>
-                    {isMobileMenuOpen && (
-                        <div className={styles.overlay}>
-                            <Container>
-                                <div className={styles.overlayItems}>
-                                    <div className={styles.buttonWrapper}>
-                                        <button
-                                            className={styles.close}
-                                            onClick={handleMobileMenuClose}
-                                        >
-                                            <FontAwesomeIcon icon={faTimes} />
-                                        </button>
-                                    </div>
-
-                                    <div className={styles.hamburgerMenu}>
-                                        <ul>{renderNavItems(navItems)}</ul>
-                                    </div>
+                    
+                    <div className={`${styles.overlay} ${!isMobileMenuOpen ? styles.hide : styles.show}`}>
+                        <Container>
+                            <div className={styles.overlayItems}>
+                                <div className={styles.buttonWrapper}>
+                                    <button
+                                        className={styles.close}
+                                        onClick={handleMobileMenuClose}
+                                    >
+                                        <FontAwesomeIcon icon={faTimes} />
+                                    </button>
                                 </div>
-                            </Container>
-                        </div>
-                    )}
+
+                                <div className={styles.hamburgerMenu}>
+                                    <ul>{renderNavItems(navItems)}</ul>
+                                </div>
+                            </div>
+                        </Container>
+                    </div>
+                    
                 </div>
             </Container>
         </header>
