@@ -83,7 +83,7 @@ export default function Header() {
                         <FontAwesomeIcon icon={faBars} />
                     </button>
                     
-                    <div className={`${styles.overlay} ${!isMobileMenuOpen ? styles.hide : styles.show}`}>
+                    <div className={`${styles.overlay} ${!isMobileMenuOpen ? "" : styles.show}`}>
                         <Container>
                             <div className={styles.overlayItems}>
                                 <div className={styles.buttonWrapper}>

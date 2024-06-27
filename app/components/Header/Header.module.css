@@ -60,28 +60,6 @@
     color: white;
 }
 
-@keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-}
-
 .overlay {
     background-color: #fff;
     display: flex;
@@ -96,6 +74,7 @@
     top: 0;
     left: 0;
     z-index: 1000;
+    transition: visibility 0s linear 0.3s, opacity 0.3s linear, transform 0.3s linear;
 }
 
 .overlay ul {
@@ -115,11 +94,10 @@
 }
 
 .overlay.show {
-    animation: slideDown 0.5s ease-out forwards;
-}
-
-.overlay.hide {
-    animation: slideUp 0.75s ease-out forwards;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
 }
 
 @media screen and (max-width: 1024px) {
