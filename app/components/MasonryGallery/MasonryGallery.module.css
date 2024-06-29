@@ -95,4 +95,16 @@
     .masonry {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
+
+    .arrow {
+        font-size: 20px;
+    }
+
+    .leftArrow {
+        left: 20px;
+    }
+
+    .rightArrow {
+        right: 20px;
+    }
 }
