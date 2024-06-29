@@ -44,7 +44,7 @@
 }
 
 .masonryItem:hover .iconOverlay {
-    opacity: 1; 
+    opacity: 1;
     z-index: 1000;
     cursor: pointer;
 }
@@ -74,8 +74,37 @@
     object-fit: contain;
 }
 
+.arrow {
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.leftArrow {
+    left: 50px;
+}
+
+.rightArrow {
+    right: 50px;
+}
+
 @media (max-width: 1024px) {
     .masonry {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .arrow {
+        font-size: 20px;
+    }
+
+    .leftArrow {
+        left: 20px;
+    }
+
+    .rightArrow {
+        right: 20px;
     }
 }
